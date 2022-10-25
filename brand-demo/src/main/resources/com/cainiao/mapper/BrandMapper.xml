@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cainiao.mapper.BrandMapper"> <!--与mapper接口的全类名一致-->
+
+    <!--id与mapper接口中的 list<Brand> selectAl方法名一致-->
+<!--    <select id="selectAl">-->
+<!--        select * from tb_brand;-->
+<!--    </select>-->
+
+    <!--
+           mapper接口和映射文件要保证两个一致
+           1 mapper接口的全类名和映射文件的namespace一致
+           2 mapper接口中的方法名和映射文件中的sql的id一致
+            -->
+    <resultMap id="brandResultMap" type="brand">
+        <result column="brand_name" property="brandName"></result>
+        <result column="company_name" property="companyName"></result>
+    </resultMap>
+    <resultMap id="accountResultMap" type="account">
+<!--        <result column="brand_name" property="brandName"></result>-->
+<!--        <result column="company_name" property="companyName"></result>-->
+    </resultMap>
+</mapper>

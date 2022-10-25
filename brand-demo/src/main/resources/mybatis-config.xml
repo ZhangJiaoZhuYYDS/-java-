@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+    MyBatis核心配置文件中，标签的顺序：
+    properties?,settings?,typeAliases?,typeHandlers?,
+    objectFactory?,objectwrapperFactory?,refLectorFactory?,
+    plugins?,environments?,databaseIdProvider?,mappers?
+    -->
+
+    <!--引入jdbc.properties文件-->
+    <properties resource="jdbc.properties" />
+    <!--起别名-->
+    <typeAliases>
+        <!--类名别名不区分大小写-->
+        <!--属性：
+                type：设置需要设置别名的类型
+                αlias：设置某个类型的别名，若不设置该属性，那么该类型拥有默认的别名，之后resultType="Brand",即类名且不区分大小写-->
+        <typeAlias type="com.cainiao.pojo.Brand" alias="Brand" />
+        <!--包名别名-->
+        <!--以包为单位，将包下所有的类型设置默认的类型别名，即类名且不区分大小写  之后resultType=brand(com.cainiao.pojo下的实体类)-->
+        <package name="com.cainiao.pojo"  />
+    </typeAliases>
+    <!--配置连接数据库的多个环境-->
+    <environments default="development">
+        <!--默认环境-->
+        <environment id="development">    <!--开发环境   id:表示链接数据库的唯一标识，不能重复-->
+            <!--事务管理器  type="JDBC/MANAGED" 采用JDBC管理方式:当前环境中，使用的是JDBC原生事务管理方式，事物的提交的回滚使用手动方式
+                           MANAGED： 被管理，如Spring-->
+            <transactionManager type="JDBC"/>
+            <!--dataSource:配置数据源
+                     属性：
+                        type:设置数据源类型  type=“POOLED/UNPOOLED/JNDI”
+                                    POOLED:表示使用数据库连接池
+                                    UNPOOLED:表示不使用数据库连接池
+                                    JNDI:表示使用上下文中的数据源
+                                           -->
+            <dataSource type="POOLED">
+                <!--设置链接数据库的驱动-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <!--设置链接数据库的地址-->
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--引入映射文件-->
+
+    <!--引入xml映射文件-->
+    <mappers>
+        <!-- 1 mapper扫描引入-->
+<!--        <mapper resource="mapper/BrandMapper.xml"></mapper>-->
+        <!-- 2 包名引入-->
+        <!--注意  要求 1,mapper接口所在的包要和映射文件所在的包一致  2,mapper接口名字要和映射文件的名字一致-->
+        <package name="com.cainiao.mapper"/>
+    </mappers>
+</configuration>

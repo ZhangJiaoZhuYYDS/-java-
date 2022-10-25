@@ -1,0 +1,17 @@
+RegisterServlet   理解
+
+准备环境
+
+1 将login.html,register.html文件放到webapp文件下
+2 创建db1数据库，创建tb_user数据表，创建User实体类（java-com.cainiao-pojo-User.java）
+3 在web项目中的pom.xml文件中导入需要用到的坐标：mybatis坐标，mysql驱动坐标，servlet坐标
+4 配置mybatis-config.xml核心配置文件（（起别名，简化包操作）设置mapper扫描文件，连接com.cainiao.mapper包名扫描包中的的mapper文件），放在resources文件下
+5 配置UserMapper接口   Java文件下新建包package：com.cainiao.mapper包 创建接口UserMapper,创建相应sql方法（注解方法；参数注解）
+6 配置UserMapper.xml映射文件(创建sql语句)  resources新建Directory(com/cainiao/mapper)--UserMapper.xml  因为mapper扫描文件的原因要求 实现编译打包后接口和映射文件在一起
+
+实现步骤
+1 用户填写账号，密码等信息，点击注册按钮，提交到RegisterServlet   设置register.html的action为"/tomcat-demo/registerServlet" method为post
+2 java-web新建servlet文件（知道这个用法：添加注解@WebServlet("/registerServlet")）
+3 在servlet文件中使用mybatis保存数据
+           使用request对象获取客户端传入的账号密码，封装成User对象，使用mybatis连接数据库获取sqlSession对象。获取mapper.class。调用mapper select方法返回User对象。
+           进行判断，若不存在User对象，则调用mapper.add方法添加User对象到数据库，记得sqlSession.commit()手动提交事务。关闭sqlSession对象

@@ -1,0 +1,4 @@
+# Project exclude paths
+/brand-demo/src/main/webapp/vue/23_脚手架/vueTest/node_modules/
+/brand-demo/src/main/webapp/vue/Demo_serve/node_modules/
+/out/
